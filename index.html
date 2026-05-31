@@ -2,11 +2,12 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>Riksan AI</title>
+  <!-- Pakai Inter dari Google Fonts — tersedia & reliable -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -18,7 +19,7 @@
       <div class="sb-top">
         <div class="sb-brand">
           <div class="brand-mark">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
                 stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -26,26 +27,26 @@
           <span class="brand-name">Riksan AI</span>
         </div>
         <button class="sb-new-btn" id="newChatBtn" title="Chat Baru">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
             <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
           </svg>
         </button>
       </div>
 
       <div class="sb-search">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
           <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
           <path d="m21 21-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
         <input type="text" placeholder="Cari percakapan..." id="searchInput" autocomplete="off" />
       </div>
 
-      <div class="sb-section-label">Riwayat</div>
+      <div class="sb-label">Riwayat</div>
       <nav class="sb-list" id="chatList"></nav>
 
       <div class="sb-bottom">
         <div class="model-wrap">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
             <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
             <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"
               stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -62,9 +63,9 @@
         </div>
         <div class="user-row">
           <div class="user-ava">R</div>
-          <span>Riksan</span>
-          <button class="icon-btn danger" id="clearBtn" title="Hapus chat ini">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <span class="user-name">Riksan</span>
+          <button class="del-btn" id="clearBtn" title="Hapus chat ini">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
               <path d="M3 6h18M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -78,46 +79,41 @@
     <!-- ── MAIN ── -->
     <main class="main">
       <header class="topbar">
-        <button class="menu-btn" id="menuBtn">
+        <button class="menu-btn" id="menuBtn" aria-label="Menu">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
             <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
           </svg>
         </button>
         <span class="topbar-title" id="topbarTitle">Riksan AI</span>
-        <div class="topbar-model" id="topbarModel">Claude Sonnet 4.5</div>
+        <span class="topbar-model" id="topbarModel">Claude Sonnet 4.5</span>
       </header>
 
-      <!-- Chat viewport -->
-      <div class="chat-viewport" id="chatArea">
+      <!-- Chat area -->
+      <div class="chat-area" id="chatArea">
 
         <!-- Welcome -->
         <div class="welcome" id="welcomeScreen">
-          <div class="welcome-glow"></div>
-          <div class="welcome-body">
-            <div class="welcome-logo">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+          <div class="welcome-inner">
+            <div class="w-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
                   stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
             <h1>Halo, Riksan 👋</h1>
-            <p>Mau ngapain hari ini? Tanya apa aja.</p>
-            <div class="prompt-grid">
-              <button class="prompt-chip" data-prompt="Buatkan full app todo list dengan HTML CSS JS yang lengkap dan responsive">
-                <span class="chip-icon">💻</span>
-                <span>Buatkan Todo App</span>
+            <p>Mau ngapain hari ini?</p>
+            <div class="chip-grid">
+              <button class="chip" data-prompt="Buatkan full app todo list dengan HTML CSS JS yang lengkap dan responsive">
+                <span>💻</span><span>Buatkan Todo App</span>
               </button>
-              <button class="prompt-chip" data-prompt="Jelaskan cara kerja async/await di JavaScript dengan contoh nyata">
-                <span class="chip-icon">📖</span>
-                <span>Async/Await JS</span>
+              <button class="chip" data-prompt="Jelaskan cara kerja async/await di JavaScript dengan contoh nyata">
+                <span>📖</span><span>Async/Await JS</span>
               </button>
-              <button class="prompt-chip" data-prompt="Buatkan REST API dengan Node.js Express lengkap dengan CRUD">
-                <span class="chip-icon">🔧</span>
-                <span>REST API Node.js</span>
+              <button class="chip" data-prompt="Buatkan REST API dengan Node.js Express lengkap dengan CRUD dan validasi">
+                <span>🔧</span><span>REST API Node.js</span>
               </button>
-              <button class="prompt-chip" data-prompt="Review kode ini dan perbaiki bug serta performa-nya">
-                <span class="chip-icon">🔍</span>
-                <span>Review & Debug Kode</span>
+              <button class="chip" data-prompt="Review kode ini dan perbaiki bug serta tingkatkan performa-nya">
+                <span>🔍</span><span>Review & Debug Kode</span>
               </button>
             </div>
           </div>
