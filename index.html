@@ -3,48 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Riksan AI — Your Intelligent Assistant</title>
+  <title>Riksan AI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="app-wrapper">
-    <!-- Sidebar -->
+  <div class="layout">
+
+    <!-- ── SIDEBAR ── -->
     <aside class="sidebar" id="sidebar">
-      <div class="sidebar-header">
-        <div class="logo">
-          <div class="logo-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <div class="sb-top">
+        <div class="sb-brand">
+          <div class="brand-mark">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-          <span class="logo-text">Riksan AI</span>
+          <span class="brand-name">Riksan AI</span>
         </div>
-        <button class="new-chat-btn" id="newChatBtn" title="New Chat">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <button class="sb-new-btn" id="newChatBtn" title="Chat Baru">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
             <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
           </svg>
         </button>
       </div>
 
-      <div class="sidebar-search">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+      <div class="sb-search">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
           <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
           <path d="m21 21-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        <input type="text" placeholder="Cari percakapan..." id="searchInput" />
+        <input type="text" placeholder="Cari percakapan..." id="searchInput" autocomplete="off" />
       </div>
 
-      <div class="chat-history-label">Riwayat</div>
-      <div class="chat-list" id="chatList"></div>
+      <div class="sb-section-label">Riwayat</div>
+      <nav class="sb-list" id="chatList"></nav>
 
-      <div class="sidebar-footer">
-        <div class="model-selector">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+      <div class="sb-bottom">
+        <div class="model-wrap">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
             <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
-            <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
           <select id="modelSelect">
             <option value="kr/claude-sonnet-4.5">Claude Sonnet 4.5</option>
@@ -56,95 +60,99 @@
             <option value="cx/gpt-5.5">GPT-5.5</option>
           </select>
         </div>
-        <div class="user-info">
-          <div class="user-avatar">R</div>
+        <div class="user-row">
+          <div class="user-ava">R</div>
           <span>Riksan</span>
+          <button class="icon-btn danger" id="clearBtn" title="Hapus chat ini">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M3 6h18M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
         </div>
       </div>
     </aside>
 
-    <!-- Mobile overlay -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="sb-overlay" id="sidebarOverlay"></div>
 
-    <!-- Main content -->
-    <main class="main-content">
-      <!-- Top bar -->
+    <!-- ── MAIN ── -->
+    <main class="main">
       <header class="topbar">
         <button class="menu-btn" id="menuBtn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+            <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
           </svg>
         </button>
-        <div class="topbar-title" id="topbarTitle">Riksan AI</div>
-        <div class="topbar-actions">
-          <button class="icon-btn" id="clearBtn" title="Hapus chat">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <path d="M3 6h18M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
+        <span class="topbar-title" id="topbarTitle">Riksan AI</span>
+        <div class="topbar-model" id="topbarModel">Claude Sonnet 4.5</div>
       </header>
 
-      <!-- Chat area -->
-      <div class="chat-area" id="chatArea">
-        <!-- Welcome screen -->
-        <div class="welcome-screen" id="welcomeScreen">
-          <div class="welcome-orb"></div>
-          <div class="welcome-content">
-            <h1 class="welcome-title">Riksan <span>AI</span></h1>
-            <p class="welcome-subtitle">Asisten cerdas berbasis Claude & GPT. Tanya apa saja.</p>
-            <div class="suggestion-grid">
-              <button class="suggestion-card" data-prompt="Jelaskan konsep machine learning dengan bahasa sederhana">
-                <div class="suggestion-icon">🧠</div>
-                <span>Jelaskan Machine Learning</span>
+      <!-- Chat viewport -->
+      <div class="chat-viewport" id="chatArea">
+
+        <!-- Welcome -->
+        <div class="welcome" id="welcomeScreen">
+          <div class="welcome-glow"></div>
+          <div class="welcome-body">
+            <div class="welcome-logo">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h1>Halo, Riksan 👋</h1>
+            <p>Mau ngapain hari ini? Tanya apa aja.</p>
+            <div class="prompt-grid">
+              <button class="prompt-chip" data-prompt="Buatkan full app todo list dengan HTML CSS JS yang lengkap dan responsive">
+                <span class="chip-icon">💻</span>
+                <span>Buatkan Todo App</span>
               </button>
-              <button class="suggestion-card" data-prompt="Buatkan caption Instagram yang menarik untuk produk fashion">
-                <div class="suggestion-icon">✍️</div>
-                <span>Buat Caption Instagram</span>
+              <button class="prompt-chip" data-prompt="Jelaskan cara kerja async/await di JavaScript dengan contoh nyata">
+                <span class="chip-icon">📖</span>
+                <span>Async/Await JS</span>
               </button>
-              <button class="suggestion-card" data-prompt="Bantu saya membuat rencana bisnis online shop">
-                <div class="suggestion-icon">💼</div>
-                <span>Rencana Bisnis Online</span>
+              <button class="prompt-chip" data-prompt="Buatkan REST API dengan Node.js Express lengkap dengan CRUD">
+                <span class="chip-icon">🔧</span>
+                <span>REST API Node.js</span>
               </button>
-              <button class="suggestion-card" data-prompt="Tuliskan kode JavaScript untuk fetch API dengan error handling">
-                <div class="suggestion-icon">💻</div>
-                <span>Tulis Kode JavaScript</span>
+              <button class="prompt-chip" data-prompt="Review kode ini dan perbaiki bug serta performa-nya">
+                <span class="chip-icon">🔍</span>
+                <span>Review & Debug Kode</span>
               </button>
             </div>
           </div>
         </div>
 
-        <!-- Messages container -->
-        <div class="messages-container" id="messagesContainer"></div>
+        <!-- Messages -->
+        <div class="msg-feed" id="messagesContainer"></div>
       </div>
 
-      <!-- Input area -->
-      <div class="input-area">
-        <div class="input-wrapper">
+      <!-- Input -->
+      <div class="input-dock">
+        <div class="input-box">
           <textarea
             id="messageInput"
-            placeholder="Kirim pesan ke Riksan AI..."
+            placeholder="Kirim pesan..."
             rows="1"
             maxlength="4000"
           ></textarea>
-          <div class="input-actions">
-            <span class="char-count" id="charCount">0/4000</span>
-            <button class="send-btn" id="sendBtn" disabled>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <div class="input-row">
+            <span class="char-count" id="charCount">0 / 4000</span>
+            <button class="send-btn" id="sendBtn" disabled aria-label="Kirim">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"
+                  stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
           </div>
         </div>
-        <p class="input-disclaimer">Riksan AI dapat membuat kesalahan. Verifikasi informasi penting.</p>
+        <p class="disclaimer">Riksan AI bisa salah. Verifikasi info penting.</p>
       </div>
     </main>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/core.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/build/highlight.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css" />
   <script src="app.js"></script>
 </body>
 </html>
