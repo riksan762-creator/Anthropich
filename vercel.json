@@ -1,27 +1,5 @@
 {
   "version": 2,
-  "name": "riksan-ai",
-  "builds": [
-    {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "*.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.css",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.js",
-      "use": "@vercel/static",
-      "config": {
-        "zeroConfig": true
-      }
-    }
-  ],
   "routes": [
     {
       "src": "/api/(.*)",
@@ -30,19 +8,6 @@
     {
       "src": "/(.*)",
       "dest": "/$1"
-    }
-  ],
-  "env": {
-    "HIDEPULSA_API_KEY": "@hidepulsa_api_key"
-  },
-  "headers": [
-    {
-      "source": "/api/(.*)",
-      "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
-        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" }
-      ]
     }
   ]
 }
