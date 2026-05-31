@@ -141,7 +141,7 @@ function renderList(filter = '') {
 }
 
 function renderMessages(msgs) {
-  el.welcome.style.display = 'none';
+  el.welcome.classList.add('hidden');
   el.feed.classList.add('visible');
   el.feed.innerHTML = msgs.map(m => buildRow(m)).join('');
   scrollBottom();
@@ -177,14 +177,14 @@ function buildRow(msg) {
 }
 
 function showWelcome() {
-  el.welcome.style.display = 'flex';
+  el.welcome.classList.remove('hidden');
   el.feed.classList.remove('visible');
   el.feed.innerHTML = '';
   el.topTitle.textContent = 'Riksan AI';
 }
 
 function appendRow(msg) {
-  el.welcome.style.display = 'none';
+  el.welcome.classList.add('hidden');
   el.feed.classList.add('visible');
   el.feed.insertAdjacentHTML('beforeend', buildRow(msg));
   scrollBottom();
@@ -192,7 +192,7 @@ function appendRow(msg) {
 
 // Buat bubble streaming kosong, kembalikan elemen konten
 function createStreamBubble() {
-  el.welcome.style.display = 'none';
+  el.welcome.classList.add('hidden');
   el.feed.classList.add('visible');
   const wrap = document.createElement('div');
   wrap.className = 'msg-row';
