@@ -1,100 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riksan AI — Universal Intelligence Platform</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riksan AI — Premium Assistant</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="app-container">
-        
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <span>Riksan AI</span>
-                </div>
-                <button class="new-chat-btn" id="newChatBtn">
-                    <i class="fa-solid fa-plus"></i> Obrolan Baru
-                </button>
+
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <i class="fa-solid to-fade fa-wand-magic-sparkles"></i>
+          <span>Riksan AI</span>
+        </div>
+        <button class="new-chat-btn" id="newChatBtn">
+          <i class="fa-solid fa-plus"></i> New Chat
+        </button>
+      </div>
+      
+      <div class="sidebar-history" id="chatHistory">
+        <div class="history-item active"><i class="fa-regular fa-comment"></i> Analisis Market & Kode</div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="avatar">R</div>
+          <div class="user-info">
+            <span class="user-name">Developer Workspace</span>
+            <span class="user-status">Sawargi Pay Project</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="chat-area">
+      <header class="chat-header">
+        <div class="model-selector-container">
+          <label for="modelSelect"><i class="fa-solid fa-cpu"></i> Engine:</label>
+          <select id="modelSelect">
+            <option value="gpt-4o">GPT-4o (Default)</option>
+            <option value="claude-3-5-sonnet">Claude 3.5 Sonnet</option>
+            <option value="claude-3-opus">Claude Opus</option>
+            <option value="deepseek-coder">DeepSeek Coder (Spesialis Coding)</option>
+          </select>
+        </div>
+        <div class="system-status">
+          <span class="status-dot"></span> Active
+        </div>
+      </header>
+
+      <div class="messages-container" id="messagesContainer">
+        <div class="welcome-screen" id="welcomeScreen">
+          <h1>Bagaimana saya bisa membantu Anda hari ini, Riksan?</h1>
+          <p>Asisten AI universal untuk analisis market, pembuatan kode skrip, dan optimalisasi sistem.</p>
+          <div class="features-grid">
+            <div class="feature-card" onclick="quickAction('Bantu saya membuat fungsi integrasi API payment gateway dengan JavaScript')">
+              <i class="fa-solid fa-code"></i>
+              <h3>Slicing & Coding</h3>
+              <p>Tulis atau perbaiki fungsi JavaScript, HTML, CSS dengan instan.</p>
             </div>
-            
-            <div class="model-selector-container">
-                <label for="modelSelect"><i class="fa-solid fa-robot"></i> Engine Model</label>
-                <select id="modelSelect">
-                    <option value="claude-3-5-sonnet">Claude 3.5 Sonnet</option>
-                    <option value="claude-3-opus-20240229">Claude 3 Opus</option>
-                    <option value="gpt-4o">GPT-4o Premium</option>
-                    <option value="o1-mini">OpenAI o1-Mini</option>
-                </select>
+            <div class="feature-card" onclick="quickAction('Lakukan analisis tren pasar fintech PPOB dan e-wallet tahun ini')">
+              <i class="fa-solid fa-chart-line"></i>
+              <h3>Analisis Market</h3>
+              <p>Riset data keuangan, strategi bisnis, dan tren finansial terbaru.</p>
             </div>
+          </div>
+        </div>
+      </div>
 
-            <div class="sidebar-history">
-                <div class="history-title">Sesi Aktif</div>
-                <div class="history-item active" id="currentSessionTab">
-                    <i class="fa-regular fa-comment-dots"></i> <span>Workspace Utama</span>
-                </div>
-            </div>
+      <footer class="chat-footer">
+        <div class="input-wrapper">
+          <textarea id="userInput" rows="1" placeholder="Ketik pesan atau perintah analisis di sini..."></textarea>
+          <button id="sendBtn" disabled>
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
+        <p class="disclaimer">Riksan AI menggunakan infrastruktur HIDEPULSA AI Universal Endpoint.</p>
+      </footer>
+    </main>
+  </div>
 
-            <div class="sidebar-footer">
-                <div class="user-profile">
-                    <div class="avatar">R</div>
-                    <div class="user-info">
-                        <span class="user-name">Developer Partner</span>
-                        <span class="user-status">Sawargi Pay Project</span>
-                    </div>
-                </div>
-            </div>
-        </aside>
-
-        <main class="chat-main">
-            
-            <header class="chat-header">
-                <button class="toggle-sidebar" id="toggleSidebar" aria-label="Toggle Sidebar">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <div class="current-model-display">
-                    <span id="activeModelBadge" class="active-model-badge">Claude 3.5 Sonnet</span>
-                </div>
-            </header>
-
-            <div class="chat-body" id="chatBody">
-                
-                <div class="welcome-container" id="welcomeContainer">
-                    <h1>Riksan AI</h1>
-                    <p>Sistem kecerdasan artifisial modular ditenagai oleh HIDEPULSA AI Enterprise Universal API.</p>
-                    
-                    <div class="suggested-prompts">
-                        <div class="prompt-card" data-prompt="Bantu buatkan script landing page estetik menggunakan Tailwind CSS.">
-                            <i class="fa-solid fa-code"></i>
-                            <span>Coding Assistant</span>
-                        </div>
-                        <div class="prompt-card" data-prompt="Bagaimana cara optimasi performa query database skala besar?">
-                            <i class="fa-solid fa-database"></i>
-                            <span>Database Architecture</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <footer class="chat-input-container">
-                <form id="chatForm" class="input-form">
-                    <textarea id="userInput" placeholder="Tanyakan sesuatu ke Riksan AI..." rows="1" required></textarea>
-                    <button type="submit" id="sendBtn" aria-label="Kirim Pesan">
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </button>
-                </form>
-                <div class="input-footer-text">
-                    Riksan AI terhubung langsung secara secure via Vercel Proxy Serverless.
-                </div>
-            </footer>
-
-        </main>
-    </div>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
