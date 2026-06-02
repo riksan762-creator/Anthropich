@@ -1,9 +1,6 @@
 {
   "version": 2,
-  "public": true,
-  "cleanUrls": true,
   "rewrites": [
-    { "source": "/api/chat", "destination": "/api/chat.js" },
-    { "source": "/(.*)", "destination": "/public/$1" }
+    { "source": "/api/chat", "destination": "/api/chat.js" }
   ]
 }
