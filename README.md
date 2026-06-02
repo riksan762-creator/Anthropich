@@ -1,86 +1,43 @@
-# 🤖 Riksan AI
+<div align="center">
 
-Chat interface premium berbasis Claude & GPT, powered by HIDEPULSA AI API.
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Robot.png" alt="Robot" width="90" height="90" />
 
-## 📁 Struktur File
+  # 🌌 Riksan AI — Universal Intelligence Platform
 
-```
-riksan-ai/
-├── index.html          ← Frontend utama
-├── style.css           ← Styling premium dark UI
-├── app.js              ← Logic frontend (chat, history, dll)
-├── api/
-│   └── chat.js         ← Vercel serverless function (proxy API)
-├── vercel.json         ← Konfigurasi Vercel
-└── README.md
-```
+  **An elegant, enterprise-grade AI Chat interface built for high-performance multitasking.**  
+  *Powered by HIDEPULSA AI Universal API Ecosystem.*
 
-## 🚀 Deploy ke Vercel
+  [![Vercel Deployment](https://img.shields.io/badge/Deploy-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
+  [![GitHub License](https://img.shields.io/badge/License-MIT-58a6ff?style=for-the-badge)](https://github.com)
+  [![Platform Compatibility](https://img.shields.io/badge/Engine-OpenAI%20%26%20Anthropic-orange?style=for-the-badge)](https://ai.hidepulsa.com)
 
-### 1. Push ke GitHub
+  <p align="center">
+    <a href="#-fitur-utama">Fitur Utama</a> •
+    <a href="#-arsitektur-keamanan">Arsitektur</a> •
+    <a href="#-panduan-instalasi">Instalasi</a> •
+    <a href="#-langkah-deployment">Deployment</a>
+  </p>
+</div>
 
-```bash
-git init
-git add .
-git commit -m "Initial: Riksan AI"
-git remote add origin https://github.com/USERNAME/riksan-ai.git
-git push -u origin main
-```
+---
 
-### 2. Import ke Vercel
+## 🌟 Fitur Utama
 
-- Buka [vercel.com](https://vercel.com)
-- Klik **Add New → Project**
-- Import repo `riksan-ai` dari GitHub
-- Klik **Deploy**
+Riksan AI dirancang untuk memberikan pengalaman interaksi AI yang mulus, cepat, dan aman dengan tampilan premium mirip ChatGPT.
 
-### 3. Tambah Environment Variable
+*   **🤖 Dual-Engine Compatibility:** Akses langsung ke 37+ model AI mutakhir (termasuk lini Claude 3.5 Sonnet, Claude Opus, GPT-4o, hingga OpenAI o1-mini) hanya menggunakan satu basis API.
+*   **⚡ Multitasking & Responsive UI:** Antarmuka *Dark Mode* adaptif yang dioptimalkan untuk perangkat mobile maupun desktop dengan transisi yang halus.
+*   **🔒 Zero Client-Side Leakage:** Keamanan API Key tingkat tinggi melalui arsitektur enkapsulasi fungsi serverless.
+*   **🚀 Instant Prompting:** Dilengkapi dengan pintasan kartu rekomendasi perintah untuk mempercepat alur kerja *Coding* dan *Architecture*.
 
-- Buka **Project Settings → Environment Variables**
-- Tambah:
-  - **Name:** `HIDEPULSA_API_KEY`
-  - **Value:** `[API key kamu dari bot Telegram HIDEPULSA]`
-  - **Environment:** Production + Preview + Development
-- Klik **Save**
-- Klik **Redeploy**
+---
 
-## ⚙️ Konfigurasi
+## 🛡️ Arsitektur Keamanan (Vercel Serverless)
 
-### Ganti model default
+Aplikasi ini menggunakan metode **Reverse Proxy** berbasis serverless. Kunci API Anda tidak akan pernah tersentuh oleh browser pengguna, mencegah eksploitasi kuota oleh pihak ketiga.
 
-Edit `app.js` line `modelSelect` atau ganti di `api/chat.js`:
-
-```js
-model = 'kr/claude-sonnet-4.5'  // default
-```
-
-### Model tersedia
-
-- `kr/claude-opus-4.7` — Paling pintar
-- `kr/claude-sonnet-4.5` — Balance (recommended)
-- `kr/claude-haiku-4.5` — Tercepat
-- `kr/deepseek-3.2` — Alternatif
-- `cx/gpt-5.5` — GPT model
-
-## 🔐 Keamanan
-
-- API key **tidak pernah expose** ke frontend
-- Semua request ke HIDEPULSA melalui serverless function
-- Key disimpan aman di Vercel Environment Variables
-
-## 🛠️ Local Development
-
-```bash
-npm i -g vercel
-vercel dev
-```
-
-Tambah `.env.local`:
-
-```
-HIDEPULSA_API_KEY=your_api_key_here
-```
-
------
-
-Made with ❤️ by Riksan
+```mermaid
+graph LR
+    Browser[Frontend UI] -- Request Tanpa Key --> Vercel[Vercel Serverless Function]
+    Vercel -- Injeksi HIDEPULSA_API_KEY --> Hidepulsa[HIDEPULSA AI Endpoint]
+    Hidepulsa --> Vercel --> Browser
