@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riksan AI — Premium Intelligence Platform</title>
+    <title>Riksan AI — Universal Intelligence Platform</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="app-container">
+        
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <i class="fa-solid to-square fa-wand-magic-sparkles"></i>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
                     <span>Riksan AI</span>
                 </div>
                 <button class="new-chat-btn" id="newChatBtn">
-                    <i class="fa-solid fa-plus"></i> New Chat
+                    <i class="fa-solid fa-plus"></i> Obrolan Baru
                 </button>
             </div>
             
@@ -30,9 +31,12 @@
                 </select>
             </div>
 
-            <div class="sidebar-history" id="chatHistory">
-                <div class="history-title">Recent Conversations</div>
+            <div class="sidebar-history">
+                <div class="history-title">Sesi Aktif</div>
+                <div class="history-item active" id="currentSessionTab">
+                    <i class="fa-regular fa-comment-dots"></i> <span>Workspace Utama</span>
                 </div>
+            </div>
 
             <div class="sidebar-footer">
                 <div class="user-profile">
@@ -46,43 +50,48 @@
         </aside>
 
         <main class="chat-main">
+            
             <header class="chat-header">
-                <button class="toggle-sidebar" id="toggleSidebar">
+                <button class="toggle-sidebar" id="toggleSidebar" aria-label="Toggle Sidebar">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <div class="current-model-display">
-                    <span id="activeModelBadge">Claude 3.5 Sonnet</span>
+                    <span id="activeModelBadge" class="active-model-badge">Claude 3.5 Sonnet</span>
                 </div>
             </header>
 
             <div class="chat-body" id="chatBody">
+                
                 <div class="welcome-container" id="welcomeContainer">
                     <h1>Riksan AI</h1>
                     <p>Sistem kecerdasan artifisial modular ditenagai oleh HIDEPULSA AI Enterprise Universal API.</p>
+                    
                     <div class="suggested-prompts">
-                        <div class="prompt-card" onclick="setPrompt('Bantu buatkan script landing page estetik menggunakan Tailwind CSS.')">
+                        <div class="prompt-card" data-prompt="Bantu buatkan script landing page estetik menggunakan Tailwind CSS.">
                             <i class="fa-solid fa-code"></i>
                             <span>Coding Assistant</span>
                         </div>
-                        <div class="prompt-card" onclick="setPrompt('Bagaimana cara optimasi performa query database skala besar?')">
+                        <div class="prompt-card" data-prompt="Bagaimana cara optimasi performa query database skala besar?">
                             <i class="fa-solid fa-database"></i>
                             <span>Database Architecture</span>
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <footer class="chat-input-container">
                 <form id="chatForm" class="input-form">
-                    <textarea id="userInput" placeholder="Tanyakan apa saja ke Riksan AI..." rows="1"></textarea>
-                    <button type="submit" id="sendBtn">
+                    <textarea id="userInput" placeholder="Tanyakan sesuatu ke Riksan AI..." rows="1" required></textarea>
+                    <button type="submit" id="sendBtn" aria-label="Kirim Pesan">
                         <i class="fa-solid fa-paper-plane"></i>
                     </button>
                 </form>
                 <div class="input-footer-text">
-                    Riksan AI dapat menghasilkan informasi yang bervariasi. Jalankan pengujian mandiri pada kode produksi.
+                    Riksan AI terhubung langsung secara secure via Vercel Proxy Serverless.
                 </div>
             </footer>
+
         </main>
     </div>
 
